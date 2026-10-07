@@ -1,0 +1,143 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://laboratory/laboratory.gd" id="1_lab"]
+[ext_resource type="Script" path="res://rendering/grid_view.gd" id="2_view"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_materials"]
+
+[sub_resource type="Theme" id="Theme_laboratory"]
+default_font_size = 18
+
+[node name="Laboratory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_laboratory")
+script = ExtResource("1_lab")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.08, 0.105, 0.14, 1)
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 24
+
+[node name="Layout" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Header" type="HBoxContainer" parent="Margin/Layout"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Margin/Layout/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+text = "材料实验室"
+
+[node name="Description" type="Label" parent="Margin/Layout/Header"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.73, 0.82, 1)
+text = "沙 / 墙 · 封闭边界"
+
+[node name="Toolbar" type="HBoxContainer" parent="Margin/Layout"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="SandButton" type="Button" parent="Margin/Layout/Toolbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(78, 40)
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_materials")
+text = "沙"
+
+[node name="WallButton" type="Button" parent="Margin/Layout/Toolbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(78, 40)
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_materials")
+text = "墙"
+
+[node name="EraseButton" type="Button" parent="Margin/Layout/Toolbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(78, 40)
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_materials")
+text = "擦除"
+
+[node name="BrushLabel" type="Label" parent="Margin/Layout/Toolbar"]
+layout_mode = 2
+text = "笔刷半径"
+
+[node name="BrushSize" type="SpinBox" parent="Margin/Layout/Toolbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 2
+min_value = 1.0
+max_value = 8.0
+value = 2.0
+
+[node name="Spacer" type="Control" parent="Margin/Layout/Toolbar"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="PauseButton" type="Button" parent="Margin/Layout/Toolbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(78, 40)
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+text = "暂停"
+
+[node name="ResetButton" type="Button" parent="Margin/Layout/Toolbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(78, 40)
+layout_mode = 2
+focus_mode = 0
+text = "重置"
+
+[node name="ClearButton" type="Button" parent="Margin/Layout/Toolbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(78, 40)
+layout_mode = 2
+focus_mode = 0
+text = "清空"
+
+[node name="GridView" type="Control" parent="Margin/Layout"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 180)
+layout_mode = 2
+size_flags_vertical = 3
+texture_filter = 1
+script = ExtResource("2_view")
+
+[node name="Hint" type="Label" parent="Margin/Layout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.73, 0.82, 1)
+theme_override_font_sizes/font_size = 16
+text = "左键绘制 · 右键擦除 · 空格暂停    |    1 沙 / 2 墙 / 3 擦除"
